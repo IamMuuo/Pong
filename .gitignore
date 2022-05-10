@@ -1,0 +1,6 @@
+*.o
+*.swp
+*.tmp
+*.dat
+*.orig
+Pong
