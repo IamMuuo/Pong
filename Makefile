@@ -1,16 +1,30 @@
-#	####################################### #
-#	Makefile for poject pong
-#	Written By Eric Muuo
-#	Email: hearteric57@gmail.com
-#	####################################### #
+#############################################################################
+# Makefile for building: Pong
+# Created By Erick Muuo
+# Project:  Pong
+# Contact: hearteric57@gmail.com
+#############################################################################
 
-c++ = g++
-libs = -lsfml-graphics -lsfml-window -lsfml-system
-flags = -Wall -Wextra -std=c++17 -g
+####### Compiler, tools and options
 
-Pong: main.o
-	$(c++) main.o -o Pong $(libs)
+CC            = gcc
+CXX           = g++
+CFLAGS        = -g -Wall -Wextra
+CXXFLAGS      = -g -std=c++17 -Wall -Wextra
+LIBS		  = -lsfml-graphics -lsfml-window -lsfml-system
+SOURCES       = main.cpp 
 
-main.o: main.cpp
-	$(c++) main.cpp -o main.o -c $(flags)
 
+
+
+Pong: main.o Bat.o
+	$(CXX) main.o Bat.o -o Pong $(LIBS) 
+
+Bat.o: include/Bat.cpp
+	$(CXX) -c $(CXXFLAGS) -o Bat.o include/Bat.cpp 
+
+main.o: main.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+clean:
+	rm *.o Pong

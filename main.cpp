@@ -6,6 +6,7 @@
 *
 *   Contains the main entry point to the program
 *********************************************************/
+#include "include/Bat.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -21,6 +22,8 @@ int main()
 
     sf::RenderWindow window(vm,"Pong",sf::Style::Fullscreen);
 
+    Bat bat(1920.0f/2.0f, 1080 - 20);
+
     while(window.isOpen())
     {
         /*****************************************************
@@ -32,12 +35,16 @@ int main()
             // terminate the game
             window.close();
         }
+        /****************************************************
+        *   clear the window
+        *****************************************************/
+        window.clear();
 
         /****************************************************
         *   Draw game objects
         ****************************************************/
         
-
+        window.draw(bat.getShape());
         /****************************************************
         *   Display the objects onto the screen
         *****************************************************/
