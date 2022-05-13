@@ -7,9 +7,13 @@
 *   Contains the main entry point to the program
 *********************************************************/
 #include "include/Bat.hpp"
+#include "include/HUD.hpp"
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
@@ -24,14 +28,25 @@ int main()
     // create a video mode object
     sf::VideoMode vm(800,600);
 
-    sf::RenderWindow window(vm,"Pong",sf::Style::Default);
+    sf::RenderWindow window(vm,"Pong",sf::Style::Close);
 
     Bat bat((800.0f/2.0f) - 50, 600 - 20);
 
     sf::Clock clock;
 
     sf::Event event;
-    std::cout << window.getSize().x;
+
+    sf::Font font;
+    font.loadFromFile("Assets/Font/font.otf");
+
+    // hud
+    Hud scoreText(0,0), helpText(400,0);
+    scoreText.setFont(font);
+    helpText.setFont(font);
+    scoreText.setText("Score: 0");
+    helpText.setText("This is the help text");
+    scoreText.setSize(20);
+    helpText.setSize(20);
 
     while(window.isOpen())
     {
@@ -84,9 +99,13 @@ int main()
         ****************************************************/
         
         window.draw(bat.getShape());
+        window.draw(helpText.getHUD());
+        window.draw(scoreText.getHUD());
+        
         /****************************************************
         *   Display the objects onto the screen
         *****************************************************/
+        helpText.scrollText(dt);
 
         window.display();
 

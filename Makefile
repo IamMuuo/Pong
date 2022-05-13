@@ -17,11 +17,14 @@ SOURCES       = main.cpp
 
 
 
-Pong: main.o Bat.o
-	$(CXX) main.o Bat.o -o Pong $(LIBS) 
+Pong: main.o Bat.o Hud.o
+	$(CXX) main.o Bat.o Hud.o -o Pong $(LIBS) 
 
 Bat.o: include/Bat.cpp
 	$(CXX) -c $(CXXFLAGS) -o Bat.o include/Bat.cpp 
+
+Hud.o: include/Hud.cpp
+	$(CXX) -c $(CXXFLAGS) -o Hud.o include/Hud.cpp 
 
 main.o: main.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
