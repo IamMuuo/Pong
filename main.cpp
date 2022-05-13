@@ -8,6 +8,7 @@
 *********************************************************/
 #include "include/Bat.hpp"
 #include "include/HUD.hpp"
+#include "include/Ball.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Color.hpp>
@@ -31,6 +32,7 @@ int main()
     sf::RenderWindow window(vm,"Pong",sf::Style::Close);
 
     Bat bat((800.0f/2.0f) - 50, 600 - 20);
+    Ball ball((800.0f/2.0f),600.0f/2.0f);
 
     sf::Clock clock;
 
@@ -101,6 +103,7 @@ int main()
         window.draw(bat.getShape());
         window.draw(helpText.getHUD());
         window.draw(scoreText.getHUD());
+        window.draw(ball.getBall());
         
         /****************************************************
         *   Display the objects onto the screen
