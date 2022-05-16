@@ -21,6 +21,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
+#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 
@@ -101,11 +102,17 @@ int main()
             ball.reboundBatOrTop();
         }
         
-        // rebounding from size
+        // rebounding from sides
         if(ball.getPosition().x < 0 ||
             ball.getPosition().x + 10 > window.getSize().x)
         {
             ball.reboundSides();
+        }
+        
+        // get the ball to rebound from bat
+        if(ball.getBounds().intersects(bat.getShape().getGlobalBounds()))
+        {
+            ball.reboundBatOrTop();
         }
         /****************************************************
         *   clear the window

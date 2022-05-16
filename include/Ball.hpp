@@ -25,6 +25,7 @@ struct Ball
         void update(const sf::Time& dt);
         void moveBall();
         sf::Vector2f getPosition();
+        sf::FloatRect getBounds();
 
         void reboundBatOrTop();
         void reboundSides();

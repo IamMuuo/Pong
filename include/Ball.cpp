@@ -30,6 +30,11 @@ sf::Vector2f Ball::getPosition()
     return shape.getPosition();
 }
 
+sf::FloatRect Ball::getBounds()
+{
+    return shape.getGlobalBounds();
+}
+
 void Ball::reboundBatOrTop()
 {
     m_directionY = -1 * m_directionY;
