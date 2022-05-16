@@ -90,7 +90,23 @@ int main()
         ****************************************************/
         sf::Time dt = clock.restart();
         bat.update(dt);
-
+        ball.update(dt);
+        
+        if(ball.getPosition().y > window.getSize().y)
+        {
+            ball.reboundBottom();
+        }
+        if(ball.getPosition().y < 0)
+        {
+            ball.reboundBatOrTop();
+        }
+        
+        // rebounding from size
+        if(ball.getPosition().x < 0 ||
+            ball.getPosition().x + 10 > window.getSize().x)
+        {
+            ball.reboundSides();
+        }
         /****************************************************
         *   clear the window
         *****************************************************/
