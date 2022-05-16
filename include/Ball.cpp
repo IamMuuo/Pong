@@ -2,6 +2,7 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
 Ball::Ball(float startX, float startY)
