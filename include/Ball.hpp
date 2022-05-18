@@ -1,6 +1,7 @@
 #ifndef _BALL_
 #define _BALL_
 
+#include "Bat.hpp"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>

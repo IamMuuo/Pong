@@ -16,14 +16,15 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Clock.hpp>
+#include <SFML/System/Sleep.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
-#include <cstdio>
+#include <unistd.h>
 #include <cstdlib>
-#include <iostream>
+#include <sstream>
 
 int main()
 {
@@ -46,10 +47,10 @@ int main()
     Hud scoreText(0,0), helpText(400,0);
     scoreText.setFont(font);
     helpText.setFont(font);
-    scoreText.setText("Score: 0");
-    helpText.setText("This is the help text");
     scoreText.setSize(20);
     helpText.setSize(20);
+
+    int score = 0, lives = 3;
 
     while(window.isOpen())
     {
@@ -86,16 +87,31 @@ int main()
                 window.close();
             }
         }
+
+        if(lives >= 1)
+        {
+            helpText.setText("Great job keep that ball bouncing!");
+        }
+        else  
+        {
+            // try again!
+            helpText.setText("You lost try again!");
+            helpText.setText("Retrying...");
+            lives = 3;
+            score = 0;
+        }
         /****************************************************
         *   Time
         ****************************************************/
         sf::Time dt = clock.restart();
         bat.update(dt);
         ball.update(dt);
-        
+        std::stringstream* score_stream = new std::stringstream;
+       
         if(ball.getPosition().y > window.getSize().y)
         {
             ball.reboundBottom();
+            lives--;
         }
         if(ball.getPosition().y < 0)
         {
@@ -113,7 +129,11 @@ int main()
         if(ball.getBounds().intersects(bat.getShape().getGlobalBounds()))
         {
             ball.reboundBatOrTop();
+            score++;
         }
+
+        *score_stream << "Score: " << score << " Lives: " << lives <<"\n";
+        scoreText.setText(score_stream->str());
         /****************************************************
         *   clear the window
         *****************************************************/
