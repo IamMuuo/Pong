@@ -7,6 +7,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
+#include <bits/types/FILE.h>
 #include <sstream>
 
 Game::Game()
@@ -45,6 +46,8 @@ void Game::render()
     {
         window.clear();
         window.draw(pauseText.getHUD());
+        window.draw(logText.getHUD());
+        window.draw(scoreText.getHUD());
     }
 
     // display the new frame
@@ -126,6 +129,20 @@ void Game::update(const sf::Time& dt)
         }
 
         logText.scrollText(dt);
+
+        if(lives > 0)
+        {
+            logText.setText("Great job");
+        }
+        else
+        {
+            logText.setText("You ran out of lives!\nBetter luck next time");
+            std::stringstream ss; 
+            ss << "You lost after scoring: " << score;
+            pauseText.setText(ss.str());
+            isRunning = false;
+            lives = 3;
+        }
 
         std::stringstream ss;
         ss << "Score: " << score << " Lives: " << lives;

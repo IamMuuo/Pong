@@ -1,6 +1,6 @@
 # PONG!
 ***
-## A simple pong game written in C++ with the SFML framework
+## A simple pong game written in C++ with the SFML framework v 0.0.1
 ***
 
 Pong emulates the classic pong game where the player has to keep the ball 
@@ -41,6 +41,10 @@ $   ./Pong
 ```
 
 ### If all goes well you shold have a window popup with pong!
+
+
+## Ready?
+<img src="ScreenShot/Pong1.png" height="400" width="400"><img src="ScreenShot/Pong2.png" height="400" width="400"><img src="ScreenShot/Pong3.png" height="400" width="400">
 
 ## Collaboration
 Any updates and help towards pong is greatly encouraged and welcome
