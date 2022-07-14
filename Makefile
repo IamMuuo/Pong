@@ -17,19 +17,23 @@ SOURCES       = main.cpp
 
 
 
-Pong: main.o Bat.o Hud.o Ball.o
-	$(CXX) main.o Bat.o Ball.o Hud.o -o Pong $(LIBS) 
+build/Pong: build/main.o build/Bat.o build/Hud.o build/Ball.o
+	$(CXX) build/main.o build/Bat.o build/Ball.o build/Hud.o -o build/Pong $(LIBS) 
 
-Bat.o: include/Bat.cpp
-	$(CXX) -c $(CXXFLAGS) -o Bat.o include/Bat.cpp 
+build/Bat.o: include/Bat.cpp
+	$(CXX) -c $(CXXFLAGS) -o build/Bat.o include/Bat.cpp 
 
-Hud.o: include/Hud.cpp
-	$(CXX) -c $(CXXFLAGS) -o Hud.o include/Hud.cpp 
+build/Hud.o: include/Hud.cpp
+	$(CXX) -c $(CXXFLAGS) -o build/Hud.o include/Hud.cpp 
 
-main.o: main.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+build/main.o: main.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/main.o main.cpp
 
-Ball.o:include/Ball.cpp
-	$(CXX) -c $(CXXFLAGS) -o Ball.o include/Ball.cpp 
+build/Ball.o:include/Ball.cpp
+	$(CXX) -c $(CXXFLAGS) -o build/Ball.o include/Ball.cpp 
+
+init:
+	mkdir build
+	cp -r Assets build/Assets
 clean:
-	rm *.o Pong
+	rm -rf build
