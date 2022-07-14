@@ -18,7 +18,7 @@ struct Game
 {
     private:
         sf::RenderWindow window;
-        bool isRunning = true; // game paused?
+        bool isRunning = false; // game paused?
         void update(const sf::Time& dt);  // update the game frame
         void render();  // render the game objects
         void processEvents();   // process the game events
@@ -29,6 +29,7 @@ struct Game
         sf::Font gameFont;  // font to be used in the game
         Hud scoreText;
         Hud logText;
+        Hud pauseText;
 
         int lives = 3;
         int score = 0;

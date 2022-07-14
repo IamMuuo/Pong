@@ -14,7 +14,8 @@ Game::Game()
 bat((800.0f/2.0f) - 50, 600 - 20),
 ball((800.0f/2.0f),600.0f/2.0f),
 scoreText(10, 10),
-logText(100,10)
+logText(300,10),
+pauseText(100, 600.f / 2)
 {
     window.setFramerateLimit(120);  // set 120 fps
     gameFont.loadFromFile("Assets/Font/font.otf");
@@ -24,16 +25,27 @@ logText(100,10)
 
     logText.setText("Keep the ball bouncing");
     scoreText.setText("Score: 0");
+
+    pauseText.setFont(gameFont);
+    pauseText.setText("Game Paused hit <Space> to play!\nHit K during gameplay to pause:)");
+    pauseText.setSize(30);
 }
 
 void Game::render()
 {
+    if(isRunning){
     // draw the objects into the screen
     window.clear(); // clear the last frame
     window.draw(scoreText.getHUD());
     window.draw(logText.getHUD());
     window.draw(ball.getBall());
     window.draw(bat.getShape());
+    }
+    else
+    {
+        window.clear();
+        window.draw(pauseText.getHUD());
+    }
 
     // display the new frame
     window.display();
@@ -57,6 +69,8 @@ void Game::processEvents()
     {
         bat.moveRight();
     }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+        isRunning = false;
 
     sf::Event event;
 
@@ -66,13 +80,18 @@ void Game::processEvents()
         {
             bat.stopRight();
             bat.stopLeft();
+            
         }
 
         if(event.type == sf::Event::Closed)
         {
             window.close();
         }
-    }
+
+        if(event.type == sf::Event::Resized)
+            isRunning = false;
+        
+        }
 }
 
 void Game::update(const sf::Time& dt)
@@ -112,6 +131,13 @@ void Game::update(const sf::Time& dt)
         ss << "Score: " << score << " Lives: " << lives;
         scoreText.setText(ss.str()); 
     }
+    else
+    {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            isRunning = true;
+        }
+    }
 }
 
 // call the game loop
@@ -124,6 +150,6 @@ void Game::run()
         sf::Time dt = clock.restart();
         processEvents();
         update(dt);
-        render();
+        render(); 
     }
 }
