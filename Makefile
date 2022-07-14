@@ -17,8 +17,11 @@ SOURCES       = main.cpp
 
 
 
-build/Pong: build/main.o build/Bat.o build/Hud.o build/Ball.o
-	$(CXX) build/main.o build/Bat.o build/Ball.o build/Hud.o -o build/Pong $(LIBS) 
+build/Pong: build/main.o build/Game.o build/Bat.o build/Hud.o build/Ball.o
+	$(CXX) build/main.o build/Game.o build/Bat.o build/Ball.o build/Hud.o -o build/Pong $(LIBS) 
+
+build/Game.o: include/Game.cpp
+	$(CXX) -c $(CXXFLAGS) -o build/Game.o include/Game.cpp
 
 build/Bat.o: include/Bat.cpp
 	$(CXX) -c $(CXXFLAGS) -o build/Bat.o include/Bat.cpp 

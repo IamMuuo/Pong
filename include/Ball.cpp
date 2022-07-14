@@ -48,7 +48,7 @@ void Ball::reboundSides()
 
 void Ball::reboundBottom()
 {
-    position.y = 0;
-    position.x = 500;
+    //position.y = 0;
+    //position.x = 500;
     m_directionY = -m_directionY;
 }

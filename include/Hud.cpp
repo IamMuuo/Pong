@@ -1,4 +1,5 @@
 #include "HUD.hpp"
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Time.hpp>
@@ -12,6 +13,8 @@ Hud::Hud(float x, float y)
     position.y = y;
 
     text.setPosition(position);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::Green);
 }
 
 void Hud::setText(const std::string &text)
