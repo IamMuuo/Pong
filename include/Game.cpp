@@ -141,6 +141,7 @@ void Game::update(const sf::Time& dt)
             ss << "You lost after scoring: " << score;
             pauseText.setText(ss.str());
             isRunning = false;
+            score = 0;
             lives = 3;
         }
 
